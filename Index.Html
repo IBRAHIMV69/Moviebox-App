@@ -6,6 +6,7 @@
     <title>Royal Short - Video Platform</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
+        /* All previous CSS remains the same */
         * {
             margin: 0;
             padding: 0;
@@ -167,7 +168,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             display: none;
             align-items: center;
             justify-content: center;
@@ -175,7 +176,6 @@
         }
         .ad-popup {
             position: relative;
-            bottom: 15px;
             width: 100%;
             max-width: 250px;
             border-radius: 15px;
@@ -184,7 +184,6 @@
         }
         .ad-popup img {
             width: 100%;
-            bottom: 18px;
             border-radius: 15px;
             display: block;
         }
@@ -192,7 +191,7 @@
             position: absolute;
             top: 7px;
             right: 10px;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.2);
             color: white;
             border: none;
             padding: 0px 0px;
@@ -346,7 +345,7 @@
         <div class="ad-popup">
             <button class="close-btn" onclick="closeAd()">✖</button>
             <img id="adImage" src="" alt="Ad Image">
-            <button class="get-btn">Start Chat</button>
+            <button class="get-btn">Chat Now</button>
         </div>
     </div>
 
@@ -413,31 +412,24 @@
         }
 
         document.getElementById("menuOverlay").addEventListener("click", closeMenu);
-        
 
-        // Ad System
+        // Ad System with Customizable Button Titles
         const ads = [
             {
-                image: "https://bit.ly/49TAXap",
-                link: "https://true-click.pro/a/44J1UBOggfxOkx"
-            },                
-            {
                 image: "https://bit.ly/4gHMJHL",
-                link: "https://true-click.pro/a/44J1UBOggfxOkx"
-            },
-            {
-                image: "https://bit.ly/4gqlalZ",
-                link: "https://true-click.pro/a/44J1UBOggfxOkx"
+                link: "https://true-click.pro/a/44J1UBOggfxOkx",
+                buttonTitle: "Chat Now" // Custom button text
             },                
             {
-                image: "https://bit.ly/4fyTFVW",
-                link: "https://true-click.pro/a/44J1UBOggfxOkx"
+                image: "https://bit.ly/49TAXap",
+                link: "https://true-click.pro/a/44J1UBOggfxOkx",
+                buttonTitle: "Chat Now" // Different button text
             }
         ];
 
         let currentAdIndex = 0;
-        const firstPopupDelay = 15000;
-        const popupInterval = 15000;
+        const firstPopupDelay = 150000;
+        const popupInterval = 150000;
 
         function showAd() {
             const lastPopupTime = localStorage.getItem('lastPopupTime');
@@ -454,12 +446,15 @@
 
         function updateAdContent() {
             const ad = ads[currentAdIndex];
+            const getBtn = document.querySelector(".get-btn");
+            
             document.getElementById("adImage").src = ad.image;
             document.getElementById("adImage").setAttribute("data-link", ad.link);
-            document.querySelector(".get-btn").setAttribute("data-link", ad.link);
+            getBtn.setAttribute("data-link", ad.link);
+            getBtn.textContent = ad.buttonTitle; // Set button title
             
             document.getElementById("adImage").onclick = visitAd;
-            document.querySelector(".get-btn").onclick = visitAd;
+            getBtn.onclick = visitAd;
 
             currentAdIndex = (currentAdIndex + 1) % ads.length;
         }
@@ -486,5 +481,6 @@
             setTimeout(showAd, firstPopupDelay);
         };
     </script>
+    <script type='text/javascript' src='//pl26329612.profitableratecpm.com/af/77/9f/af779fc2accb1cc7067ad11518827e07.js'></script>
 </body>
 </html>
