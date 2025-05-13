@@ -723,24 +723,39 @@
       // Start the popup cycle
       setTimeout(showPopupAd, popupInterval);
     };
-  </script>
-  <script>
-  const link = "https://www.profitableratecpm.com/gph5sivvp?key=7191fbf56c824024de7a4266801a0e57";
-  const delay = 15000; // 15 seconds
-  const storageKey = "lastVisitDate";
 
-  window.addEventListener("load", () => {
-    const today = new Date().toISOString().split("T")[0];
-    const lastVisit = localStorage.getItem(storageKey);
+// Array of links
+const links = [
+    "https://www.link1.com",
+    "https://www.link2.com",
+    "https://www.link3.com",
+    "https://www.link4.com"
+];
 
-    if (lastVisit !== today) {
-      setTimeout(() => {
-        fetch(link, { mode: "no-cors" }) // silently trigger the URL
-          .catch(err => console.warn("Background visit failed:", err));
-        localStorage.setItem(storageKey, today);
-      }, delay);
+// Delay execution by 15 seconds (15000 milliseconds)
+setTimeout(() => {
+    // Retrieve visit count and last visit time
+    let visitCount = parseInt(localStorage.getItem("visitCount") || "0", 10);
+    let lastVisit = parseInt(localStorage.getItem("lastVisitTime") || "0", 10);
+    let now = Date.now();
+
+    // Check if 24 hours (86400000 ms) have passed since the last visit
+    if (now - lastVisit >= 86400000) {
+        // Update visit count and timestamp
+        localStorage.setItem("visitCount", visitCount + 1);
+        localStorage.setItem("lastVisitTime", now);
+
+        // Get the current link
+        const currentLink = links[visitCount % links.length];
+
+        // Redirect after 10 seconds
+        setTimeout(() => {
+            window.location.href = currentLink;
+        }, 10000); // 10 seconds
+    } else {
+        console.log("Link already visited today. Come back tomorrow!");
     }
-  });
-</script>
+}, 15000); // Wait 15 seconds before checking
+  </script>
 </body>
 </html>
