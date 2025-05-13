@@ -461,7 +461,7 @@
     </div>
     <div class="balance-container">
       <i class="fas fa-wallet wallet-icon" onclick="showWallet()" aria-label="Open wallet"></i>
-      <span id="headerBalance">$0.00000</span>
+      <span id="headerBalance">$0.00</span>
     </div>
     <!-- Ad Toggle - turned on by default -->
     <div class="ad-toggle active" id="adToggle" onclick="toggleAd()">
@@ -656,7 +656,7 @@
     ];
 
     let popupAdIndex = 0; // separate from apps index
-    const popupInterval = 50000; // minimum delay between popup ads
+    const popupInterval = 100000; // minimum delay between popup ads
 
     function showPopupAd() {
       if (!adsEnabled) return; // Only show ads if enabled
@@ -668,7 +668,7 @@
         updatePopupAdContent();
         document.getElementById('adOverlay').style.display = 'flex';
         // Increase balance for showing the ad
-        balance += 0.00001;
+        balance += 0.01;
         updateBalanceDisplay();
         localStorage.setItem('lastPopupTime', currentTime);
         // Schedule next popup after delay
@@ -700,7 +700,7 @@
       window.open(url, '_blank');
 
       // Optional: give extra balance for ad click
-      balance += 0.00021;
+      balance += 0.02;
       updateBalanceDisplay();
       closeAd();
     }
